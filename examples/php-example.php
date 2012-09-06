@@ -19,6 +19,17 @@ class StatsD {
     }
 
     /**
+     * Log gauge information
+     *
+     * @param string $stats The metric to in log timing info for.
+     * @param float $magnitude Gauge value to log
+     * @param float|1 $sampleRate the rate (0-1) for sampling.
+     **/
+    public static function gauge($stat, $magnitude, $sampleRate=1) {
+        StatsD::send(array($stat => "$magnitude|g"), $sampleRate);
+    }
+
+    /**
      * Increments one or more stats counters
      *
      * @param string|array $stats The metric(s) to increment.
